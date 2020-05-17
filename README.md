@@ -5,7 +5,7 @@
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.txt)
 [![Twitter Follow](https://img.shields.io/twitter/follow/pepi_post.svg?style=social&label=Follow)](https://twitter.com/pepi_post)
 
-# Ruby SDK Gem :gem: for [Pepipost](http://www.pepipost.com/?utm_campaign=GitHubSDK&utm_medium=GithubSDK&utm_source=GithubSDK)
+# Ruby SDK :gem: for [Pepipost](http://www.pepipost.com/?utm_campaign=GitHubSDK&utm_medium=GithubSDK&utm_source=GithubSDK)
 
 This gem contains methods for easily interacting with the Pepipost Email Sending API to send emails within few seconds.
 
@@ -30,7 +30,7 @@ This client library is a Ruby gem which can be compiled and used in your Ruby on
 
 * Open the command line interface/terminal and navigate to the folder of your choice and run the below commands to download and navigate to the downloaded folder:
 ``` git clone https://github.com/kanhaiya2012/sample-ruby.git ```
-``` cd pepipost-sdk-ruby ``` 
+* ``` cd pepipost-sdk-ruby ``` 
 
 * ``` gem build build pepipost.gemspec ``` to build the gem.
 * ``` gem install pepipost-5.0.0.gem ``` to install pepipost gem
@@ -114,7 +114,7 @@ require 'json'
 
 include Pepipost
 
-api_key = '19647c1e88ecf4a81ed90e9667344705'
+api_key = 'your api_key here'
 
 client = PepipostClient.new(api_key: api_key)
 
@@ -124,16 +124,13 @@ body.from = From.new
 body.from.email = 'from-email-here@pepipost.com'
 body.from.name = 'Example Pepi'
 body.subject = 'Emailing with Pepipost is easy'
+
 body.content = []
-
-
 body.content[0] = Content.new
 body.content[0].type = TypeEnum::HTML
 body.content[0].value = '<html><body>Hey,<br><br>Do you know integration is even simpler in Pepipost, <br>with Python <br> Happy Mailing ! <br><br>Pepipost </body></html>'
 
 body.personalizations = []
-
-
 body.personalizations[0] = Personalizations.new
 body.personalizations[0].to = []
 
@@ -141,8 +138,6 @@ body.personalizations[0].to = []
 body.personalizations[0].to[0] = EmailStruct.new
 body.personalizations[0].to[0].name = 'recipient name'
 body.personalizations[0].to[0].email = 'recipient@your-mail.com'
-
-
 
 begin
   result = send_controller.create_generate_the_mail_send_request(body)
