@@ -33,7 +33,7 @@ This client library is a Ruby gem which can be compiled and used in your Ruby on
 ``` cd pepipost-sdk-ruby ``` 
 
 * ``` gem build build pepipost.gemspec ``` to build the gem.
-* ``` gem install pepipost_gem-5.0.0.gem ``` to install pepipost gem
+* ``` gem install pepipost-5.0.0.gem ``` to install pepipost gem
 
 ![Building Gem](https://apidocs.io/illustration/ruby?step=buildSDK&workspaceFolder=pepipost-Ruby&workspaceName=pepipost-Ruby&projectName=pepipost_gem&gemName=pepipost&gemVer=5.0.0)
 
