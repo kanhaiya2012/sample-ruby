@@ -51,6 +51,10 @@ module Pepipost
     # @return [Long]
     attr_accessor :schedule
 
+    # Global bcc can be defined here
+    # @return [List of EmailStruct]
+    attr_accessor :bcc
+
     # A mapping from model property names to API property names.
     def self.names
       @_hash = {} if @_hash.nil?
@@ -65,6 +69,7 @@ module Pepipost
       @_hash['tags'] = 'tags'
       @_hash['lint_payload'] = 'lint_payload'
       @_hash['schedule'] = 'schedule'
+      @_hash['bcc'] = 'bcc'
       @_hash
     end
 
@@ -78,7 +83,8 @@ module Pepipost
                    settings = nil,
                    tags = nil,
                    lint_payload = nil,
-                   schedule = nil)
+                   schedule = nil,
+                   bcc = nil)
       @reply_to = reply_to
       @from = from
       @subject = subject
@@ -90,6 +96,7 @@ module Pepipost
       @tags = tags
       @lint_payload = lint_payload
       @schedule = schedule
+      @bcc = bcc
     end
 
     # Creates an instance of the object from a hash.
@@ -129,6 +136,14 @@ module Pepipost
       tags = hash['tags']
       lint_payload = hash['lint_payload']
       schedule = hash['schedule']
+      # Parameter is an array, so we need to iterate through it
+      bcc = nil
+      unless hash['bcc'].nil?
+        bcc = []
+        hash['bcc'].each do |structure|
+          bcc << (EmailStruct.from_hash(structure) if structure)
+        end
+      end
 
       # Create object from extracted values.
       Send.new(from,
@@ -141,7 +156,8 @@ module Pepipost
                settings,
                tags,
                lint_payload,
-               schedule)
+               schedule,
+               bcc)
     end
   end
 end

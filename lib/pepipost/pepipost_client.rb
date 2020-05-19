@@ -19,7 +19,7 @@ module Pepipost
     end
 
     # Initializer with authentication and configuration parameters.
-    def initialize(api_key: 'SGVsbG8gd2VsY29tZSB0byBQRVB')
+    def initialize(api_key: '4D51B3ECA2D4ED3A67E4E043B3F1A4D1')
       Configuration.api_key = api_key if
         api_key
     end

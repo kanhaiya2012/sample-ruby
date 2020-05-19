@@ -10,6 +10,10 @@ module Pepipost
     # @return [Object]
     attr_accessor :attributes
 
+    # Dynamic headers attributes
+    # @return [Object]
+    attr_accessor :headers
+
     # Attachments to individuals recipient
     # @return [List of Attachments]
     attr_accessor :attachments
@@ -38,14 +42,11 @@ module Pepipost
     # @return [String]
     attr_accessor :token_bcc
 
-    # headers which is json string
-    # @return [String]
-    attr_accessor :headers
-
     # A mapping from model property names to API property names.
     def self.names
       @_hash = {} if @_hash.nil?
       @_hash['attributes'] = 'attributes'
+      @_hash['headers'] = 'headers'
       @_hash['attachments'] = 'attachments'
       @_hash['to'] = 'to'
       @_hash['cc'] = 'cc'
@@ -53,20 +54,20 @@ module Pepipost
       @_hash['token_to'] = 'token_to'
       @_hash['token_cc'] = 'token_cc'
       @_hash['token_bcc'] = 'token_bcc'
-      @_hash['headers'] = 'headers'
       @_hash
     end
 
     def initialize(to = nil,
                    attributes = nil,
+                   headers = nil,
                    attachments = nil,
                    cc = nil,
                    bcc = nil,
                    token_to = nil,
                    token_cc = nil,
-                   token_bcc = nil,
-                   headers = nil)
+                   token_bcc = nil)
       @attributes = attributes
+      @headers = headers
       @attachments = attachments
       @to = to
       @cc = cc
@@ -74,7 +75,6 @@ module Pepipost
       @token_to = token_to
       @token_cc = token_cc
       @token_bcc = token_bcc
-      @headers = headers
     end
 
     # Creates an instance of the object from a hash.
@@ -91,6 +91,7 @@ module Pepipost
         end
       end
       attributes = hash['attributes']
+      headers = hash['headers']
       # Parameter is an array, so we need to iterate through it
       attachments = nil
       unless hash['attachments'].nil?
@@ -118,18 +119,17 @@ module Pepipost
       token_to = hash['token_to']
       token_cc = hash['token_cc']
       token_bcc = hash['token_bcc']
-      headers = hash['headers']
 
       # Create object from extracted values.
       Personalizations.new(to,
                            attributes,
+                           headers,
                            attachments,
                            cc,
                            bcc,
                            token_to,
                            token_cc,
-                           token_bcc,
-                           headers)
+                           token_bcc)
     end
   end
 end

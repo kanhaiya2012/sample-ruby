@@ -22,9 +22,9 @@ module Pepipost
     # @return [Boolean]
     attr_accessor :unsubscribe_track
 
-    # email address for bcc
-    # @return [List of EmailStruct]
-    attr_accessor :bcc
+    # enable or disable unsubscribe tracking
+    # @return [Boolean]
+    attr_accessor :hepf
 
     # A mapping from model property names to API property names.
     def self.names
@@ -33,7 +33,7 @@ module Pepipost
       @_hash['click_track'] = 'click_track'
       @_hash['open_track'] = 'open_track'
       @_hash['unsubscribe_track'] = 'unsubscribe_track'
-      @_hash['bcc'] = 'bcc'
+      @_hash['hepf'] = 'hepf'
       @_hash
     end
 
@@ -41,12 +41,12 @@ module Pepipost
                    click_track = nil,
                    open_track = nil,
                    unsubscribe_track = nil,
-                   bcc = nil)
+                   hepf = nil)
       @footer = footer
       @click_track = click_track
       @open_track = open_track
       @unsubscribe_track = unsubscribe_track
-      @bcc = bcc
+      @hepf = hepf
     end
 
     # Creates an instance of the object from a hash.
@@ -58,21 +58,14 @@ module Pepipost
       click_track = hash['click_track']
       open_track = hash['open_track']
       unsubscribe_track = hash['unsubscribe_track']
-      # Parameter is an array, so we need to iterate through it
-      bcc = nil
-      unless hash['bcc'].nil?
-        bcc = []
-        hash['bcc'].each do |structure|
-          bcc << (EmailStruct.from_hash(structure) if structure)
-        end
-      end
+      hepf = hash['hepf']
 
       # Create object from extracted values.
       Settings.new(footer,
                    click_track,
                    open_track,
                    unsubscribe_track,
-                   bcc)
+                   hepf)
     end
   end
 end
