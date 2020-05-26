@@ -10,7 +10,7 @@ module Pepipost
     # @return [String]
     attr_accessor :reply_to
 
-    # email address representing the sender of the mail
+    # Email address representing the sender of the mail
     # @return [From]
     attr_accessor :from
 
@@ -35,7 +35,8 @@ module Pepipost
     # @return [List of Personalizations]
     attr_accessor :personalizations
 
-    # Enable/Disable settings like click, open and unsubscribe track
+    # to recipient with some personalized data like to address, attachments and
+    # attributes
     # @return [Settings]
     attr_accessor :settings
 

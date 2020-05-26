@@ -4,9 +4,9 @@
 # https://apimatic.io ).
 
 module Pepipost
-  # SendController
-  class SendController < BaseController
-    @instance = SendController.new
+  # DomainController
+  class DomainController < BaseController
+    @instance = DomainController.new
 
     class << self
       attr_accessor :instance
@@ -16,22 +16,18 @@ module Pepipost
       self.class.instance
     end
 
-    # The endpoint send is used to generate the request to pepipost server for
-    # sending an email to recipients.
-    # @param [Send] body Required parameter: New mail request will be
-    # generated
-    # @return List of String response from the API call
-    def create_generate_the_mail_send_request(body)
+    # This endpoint enables you to add a sending domain which is one of the
+    # pre-requisites for sending emails.
+    # @param [DomainStruct] body Required parameter: Add new domain
+    # @return Object response from the API call
+    def add_domain(body)
       # Prepare query url.
-      _path_url = '/send'
-      _query_builder = Configuration.get_base_uri(
-        Configuration::Server::SERVER1
-      )
+      _path_url = '/domain'
+      _query_builder = Configuration.base_uri.dup
       _query_builder << _path_url
       _query_url = APIHelper.clean_url _query_builder
       # Prepare headers.
       _headers = {
-        'accept' => 'application/json',
         'content-type' => 'application/json; charset=utf-8'
       }
       # Prepare and execute HttpRequest.
@@ -43,7 +39,22 @@ module Pepipost
       CustomHeaderAuth.apply(_request)
       _context = execute_request(_request)
       # Validate response against endpoint and global error codes.
-      if _context.response.status_code == 405
+      if _context.response.status_code == 400
+        raise APIException.new(
+          'API Response',
+          _context
+        )
+      elsif _context.response.status_code == 401
+        raise APIException.new(
+          'API Response',
+          _context
+        )
+      elsif _context.response.status_code == 403
+        raise APIException.new(
+          'API Response',
+          _context
+        )
+      elsif _context.response.status_code == 405
         raise APIException.new(
           'Invalid input',
           _context
@@ -51,8 +62,7 @@ module Pepipost
       end
       validate_response(_context)
       # Return appropriate response type.
-      decoded = APIHelper.json_deserialize(_context.response.raw_body)
-      decoded
+      _context.response.raw_body
     end
   end
 end

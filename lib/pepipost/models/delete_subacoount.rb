@@ -4,28 +4,21 @@
 # https://apimatic.io ).
 
 module Pepipost
-  # AMP, HTML should be provided
-  class Content < BaseModel
-    # TODO: Write general description for this method
-    # @return [TypeEnum]
-    attr_accessor :type
-
-    # HTML content to be sent in your email
+  # Deletesubaccount modal
+  class DeleteSubacoount < BaseModel
+    # The username of the subaccount
     # @return [String]
-    attr_accessor :value
+    attr_accessor :username
 
     # A mapping from model property names to API property names.
     def self.names
       @_hash = {} if @_hash.nil?
-      @_hash['type'] = 'type'
-      @_hash['value'] = 'value'
+      @_hash['username'] = 'username'
       @_hash
     end
 
-    def initialize(type = nil,
-                   value = nil)
-      @type = type
-      @value = value
+    def initialize(username = nil)
+      @username = username
     end
 
     # Creates an instance of the object from a hash.
@@ -33,12 +26,10 @@ module Pepipost
       return nil unless hash
 
       # Extract variables from the hash.
-      type = hash['type']
-      value = hash['value']
+      username = hash['username']
 
       # Create object from extracted values.
-      Content.new(type,
-                  value)
+      DeleteSubacoount.new(username)
     end
   end
 end

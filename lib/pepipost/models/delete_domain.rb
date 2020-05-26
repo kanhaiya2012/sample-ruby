@@ -4,28 +4,21 @@
 # https://apimatic.io ).
 
 module Pepipost
-  # AMP, HTML should be provided
-  class Content < BaseModel
-    # TODO: Write general description for this method
-    # @return [TypeEnum]
-    attr_accessor :type
-
-    # HTML content to be sent in your email
+  # delete domain modal
+  class DeleteDomain < BaseModel
+    # Name of the domain
     # @return [String]
-    attr_accessor :value
+    attr_accessor :domain
 
     # A mapping from model property names to API property names.
     def self.names
       @_hash = {} if @_hash.nil?
-      @_hash['type'] = 'type'
-      @_hash['value'] = 'value'
+      @_hash['domain'] = 'domain'
       @_hash
     end
 
-    def initialize(type = nil,
-                   value = nil)
-      @type = type
-      @value = value
+    def initialize(domain = nil)
+      @domain = domain
     end
 
     # Creates an instance of the object from a hash.
@@ -33,12 +26,10 @@ module Pepipost
       return nil unless hash
 
       # Extract variables from the hash.
-      type = hash['type']
-      value = hash['value']
+      domain = hash['domain']
 
       # Create object from extracted values.
-      Content.new(type,
-                  value)
+      DeleteDomain.new(domain)
     end
   end
 end
